@@ -1,0 +1,22 @@
+[project]
+name = "openenv-realworld-env"
+version = "0.1.0"
+description = "Real-world OpenEnv environment"
+authors = [
+    {name = "Richa Singh"}
+]
+
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "pydantic",
+    "pyyaml",
+    "numpy",
+    "openenv-core>=0.2.0"
+]
+
+[project.scripts]
+server = "inference:app"
+
+[tool.openenv]
+entry_point = "inference:app"
