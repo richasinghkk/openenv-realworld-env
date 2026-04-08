@@ -2,29 +2,41 @@ name: openenv-realworld-env
 
 description: >
   A real-world task simulation environment
-  including email triage, data cleaning,
+  that simulates email triage, data cleaning,
   and code review tasks.
 
 version: 1.0
+
+author: Your Name
 
 tasks:
 
   - name: email_triage
     difficulty: easy
-    description: Classify email into spam or not.
+    description: Classify emails into spam, normal, or urgent.
 
   - name: data_cleaning
     difficulty: medium
-    description: Fix incorrect data entries.
+    description: Fix incorrect structured data entries.
 
   - name: code_review
     difficulty: hard
-    description: Fix indentation errors in code.
-
-action_space:
-  type: string
-  description: Agent response text
+    description: Fix indentation errors in Python code.
 
 observation_space:
-  task_id: integer
-  input_data: string
+
+  task_id:
+    type: integer
+
+  input_data:
+    type: string
+
+action_space:
+
+  response:
+    type: string
+
+reward:
+
+  type: float
+  range: [-0.2, 1.0]

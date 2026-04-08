@@ -1,4 +1,10 @@
-task_data = {
-    "input": "def add(a,b):\nreturn a+b",
-    "truth": "def add(a,b):\n    return a+b"
-}
+task_data = [
+    {
+        "input": "def add(a,b):\nreturn a+b",
+        "truth": "def add(a,b):\n    return a+b"
+    },
+    {
+        "input": "def sub(a,b):\nreturn a-b",
+        "truth": "def sub(a,b):\n    return a-b"
+    }
+]

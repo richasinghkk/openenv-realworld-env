@@ -15,30 +15,43 @@ class OpenEnv:
 
     def __init__(self):
 
-        self.tasks = [t1, t2, t3]
+        # Combine all tasks into one list
+        self.tasks = []
+
+        for item in t1:
+            self.tasks.append(("email", item))
+
+        for item in t2:
+            self.tasks.append(("cleaning", item))
+
+        for item in t3:
+            self.tasks.append(("code", item))
+
         self.index = 0
 
     def reset(self):
 
         self.index = 0
 
+        task_type, task = self.tasks[self.index]
+
         return Observation(
             task_id=0,
-            input_data=self.tasks[0]["input"]
+            input_data=task["input"]
         )
 
     def step(self, action):
 
-        task = self.tasks[self.index]
+        task_type, task = self.tasks[self.index]
 
-        if self.index == 0:
+        if task_type == "email":
 
             score = grade_email(
                 action.response,
                 task["truth"]
             )
 
-        elif self.index == 1:
+        elif task_type == "cleaning":
 
             score = grade_cleaning(
                 action.response,
@@ -52,25 +65,51 @@ class OpenEnv:
                 task["truth"]
             )
 
+        # Feedback logic
+        feedback = ""
+
+        if score == 1.0:
+            feedback = "Correct answer"
+
+        elif score >= 0.5:
+            feedback = "Partially correct"
+
+        elif score > 0:
+            feedback = "Minor progress"
+
+        elif score < 0:
+            feedback = "Penalty applied"
+
+        else:
+            feedback = "Incorrect answer"
+
         self.index += 1
 
         done = self.index >= len(self.tasks)
 
         if not done:
 
+            next_task_type, next_task = self.tasks[self.index]
+
             next_obs = Observation(
                 task_id=self.index,
-                input_data=self.tasks[self.index]["input"]
+                input_data=next_task["input"]
             )
 
         else:
 
             next_obs = None
 
-        return next_obs, score, done, {}
+        info = {
+            "feedback": feedback
+        }
+
+        return next_obs, score, done, info
 
     def state(self):
 
         return {
-            "current_task": self.index
+            "current_task_index": self.index,
+            "total_tasks": len(self.tasks),
+            "remaining_tasks": len(self.tasks) - self.index
         }
