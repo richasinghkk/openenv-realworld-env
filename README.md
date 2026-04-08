@@ -1,3 +1,15 @@
+
+---
+title: OpenEnv Realworld Env
+emoji: 🤖
+colorFrom: blue
+colorTo: green
+sdk: docker
+app_file: inference.py
+pinned: false
+---
+
+
 # 🧠 OpenEnv Real-World Task Simulation Environment
 
 ## 📌 Project Overview
@@ -13,16 +25,6 @@ Each task is evaluated using **deterministic graders** and a **meaningful reward
 
 This environment is fully containerized using **Docker** and ready for deployment on **Hugging Face Spaces**.
 
----
-
----
-title: OpenEnv Realworld Env
-emoji: 🤖
-colorFrom: blue
-colorTo: green
-sdk: docker
-app_file: inference.py
-pinned: false
 ---
 
 # 🎯 Motivation
