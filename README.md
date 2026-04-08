@@ -15,6 +15,16 @@ This environment is fully containerized using **Docker** and ready for deploymen
 
 ---
 
+---
+title: OpenEnv Realworld Env
+emoji: 🤖
+colorFrom: blue
+colorTo: green
+sdk: docker
+app_file: inference.py
+pinned: false
+---
+
 # 🎯 Motivation
 
 Modern AI agents must solve practical problems in structured workflows.  
